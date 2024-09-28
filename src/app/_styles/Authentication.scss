@@ -1,0 +1,215 @@
+@media screen and (min-width: 901px) {
+	.loginPage,
+	.registrationPage {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+		align-items: center;
+		height: fit-content;
+		background: #2a3838;
+		border-radius: 0.5rem;
+		padding: 5rem 4rem 3rem;
+		width: 330px;
+		color: #fff;
+		box-shadow: 0 0.7rem 1rem 0 #2a3838;
+
+		.loginPageTitle,
+		.registrationPageTitle {
+			font-size: 2rem;
+			margin-bottom: 0.5rem;
+			cursor: default;
+		}
+
+		.loginPageSubTitle,
+		.registrationPageSubTitle {
+			font-size: 1rem;
+			color: #c4c4c4;
+			margin-bottom: 1.5rem;
+		}
+
+		.emailInput:has(input:not([value=""]), input:focus),
+		.passwordInput:has(input:not([value=""]), input:focus),
+		.repeatPasswordInput:has(input:not([value=""]), input:focus) {
+			.emailInputName,
+			.passwordInputName,
+			.repeatPasswordInputName {
+				position: relative;
+				top: 0;
+				color: #fff;
+			}
+
+			input {
+				border-top: none;
+				border-left: none;
+				border-right: none;
+				border-bottom: 1px solid #fff;
+			}
+		}
+
+		.emailInput,
+		.passwordInput,
+		.repeatPasswordInput {
+			width: 100%;
+			margin-top: 1.5rem;
+
+			.emailInputName,
+			.passwordInputName,
+			.repeatPasswordInputName {
+				font-weight: 400;
+				transition: 500ms;
+				padding: 0 5px;
+				position: relative;
+				top: 30px;
+				z-index: 1;
+				color: #c4c4c4;
+			}
+
+			.notActivated {
+				padding: 0 5px;
+				position: relative;
+				top: 30px;
+			}
+
+			input {
+				width: calc(100% - 11px);
+				height: 2.5rem;
+				font-size: 1rem;
+				font-weight: 400;
+				border-bottom: 1px solid #c4c4c4;
+				border-top: none;
+				border-left: none;
+				border-right: none;
+				background: none;
+				outline: none;
+				color: #fff;
+				padding: 0 5px;
+				z-index: 2;
+				position: relative;
+			}
+
+			input:focus {
+				border-bottom: 1px solid #fff;
+				border-top: none;
+				border-left: none;
+				border-right: none;
+				background: none;
+			}
+
+			.visibility {
+				font-size: 1.3rem;
+				position: relative;
+				bottom: 30px;
+				left: calc(100% - 30px);
+				z-index: 3;
+				color: #fff;
+				cursor: pointer;
+			}
+		}
+
+		.passStrength {
+			width: 100%;
+			display: flex;
+			justify-content: flex-start;
+			flex-direction: column;
+			margin-top: 2px;
+
+			.progressBarDiv {
+				height: 6px;
+				background: #c4c4c4;
+				border-radius: 3px;
+
+				.progress {
+					height: 100%;
+					// border-radius: 3px 0 0 3px;
+					transition: 500ms;
+				}
+			}
+
+			.passStrengthText {
+				text-align: end;
+				margin-top: 2px;
+				height: 20px;
+			}
+		}
+
+		.passwordInput,
+		.repeatPasswordInput {
+			margin-bottom: -20px;
+
+			input {
+				padding: 0 39px 0 5px;
+				width: calc(100% - 45px);
+			}
+		}
+
+		.notSamePassError {
+			color: #ea1111;
+			text-align: end;
+			margin-top: -20px;
+			height: 20px;
+		}
+
+		.forgotPasswordLink {
+			width: 100%;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			margin: 4px 0 3rem;
+
+			.forgotPasswordText {
+				color: #ffffffcc;
+				font-size: 14px;
+				text-decoration: underline #2a3838;
+				transition: 500ms;
+			}
+
+			.forgotPasswordText:hover,
+			.forgotPasswordText:focus {
+				text-decoration: underline;
+				color: #fff;
+				outline: none;
+			}
+		}
+
+		.loginButton,
+		.registrationButton {
+			cursor: pointer;
+			color: #2a3838;
+			font-weight: 500;
+			background: #fff;
+			padding: 0.8rem 2rem;
+			font-size: 1.3rem;
+			border-radius: 4px;
+			box-shadow: 0 2px 10px 0 #2a3838;
+			transition: 500ms;
+			border: 1px solid #fff;
+			margin-bottom: 5rem;
+		}
+
+		.registrationButton {
+			margin-top: 4.2rem;
+		}
+
+		.loginButton:hover,
+		.loginButton:focus,
+		.registrationButton:hover,
+		.registrationButton:focus {
+			box-shadow: 0 2px 10px 0 #ffffffcc;
+			border: 1px solid #2a383829;
+		}
+
+		.dontHaveAccount {
+			color: #ffffffcc;
+			font-size: 16px;
+			text-decoration: underline #2a3838;
+			transition: 500ms;
+		}
+
+		.dontHaveAccount:hover,
+		.dontHaveAccount:focus {
+			text-decoration: underline;
+			color: #fff;
+			outline: none;
+		}
+	}
+}

@@ -1,0 +1,46 @@
+{
+	"name": "nextjs_test",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@node-rs/argon2": "^1.8.3",
+		"@tanstack/react-query": "^4.35.3",
+		"@trpc/client": "^10.45.2",
+		"@trpc/react-query": "^10.45.2",
+		"@trpc/server": "^10.45.2",
+		"cors": "^2.8.5",
+		"kysely": "^0.27.4",
+		"next": "14.2.13",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"superjson": "^2.2.1",
+		"zod": "^3.23.8"
+	},
+	"devDependencies": {
+		"@lucia-auth/adapter-sqlite": "^3.0.2",
+		"@types/better-sqlite3": "^7.6.11",
+		"@types/cors": "^2.8.17",
+		"@types/node": "^22.7.4",
+		"@types/react": "^18.3.10",
+		"@types/react-dom": "^18.3.0",
+		"better-sqlite3": "^11.3.0",
+		"eslint": "^8.57.1",
+		"eslint-config-next": "14.2.13",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-prettier": "^5.2.1",
+		"lucia": "^3.2.0",
+		"postcss": "^8.4.47",
+		"prettier": "^3.3.3",
+		"prisma": "^5.20.0",
+		"prisma-kysely": "^1.8.0",
+		"sass": "^1.79.3",
+		"tailwindcss": "^3.4.13",
+		"typescript": "^5.6.2"
+	}
+}
