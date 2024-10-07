@@ -9,7 +9,7 @@
 		background: #2a3838;
 		border-radius: 0.5rem;
 		padding: 5rem 4rem 3rem;
-		width: 330px;
+		width: calc(330px + 8rem);
 		color: #fff;
 		box-shadow: 0 0.7rem 1rem 0 #2a3838;
 
@@ -30,9 +30,7 @@
 		.emailInput:has(input:not([value=""]), input:focus),
 		.passwordInput:has(input:not([value=""]), input:focus),
 		.repeatPasswordInput:has(input:not([value=""]), input:focus) {
-			.emailInputName,
-			.passwordInputName,
-			.repeatPasswordInputName {
+			.inputTitleAndRequired{
 				position: relative;
 				top: 0;
 				color: #fff;
@@ -52,9 +50,7 @@
 			width: 100%;
 			margin-top: 1.5rem;
 
-			.emailInputName,
-			.passwordInputName,
-			.repeatPasswordInputName {
+			.inputTitleAndRequired{
 				font-weight: 400;
 				transition: 500ms;
 				padding: 0 5px;
