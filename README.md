@@ -23,13 +23,13 @@ cp .env.example .env
 ### 3.Create database
 
 ```bash
-npx prisma generate
+npx prisma migrate dev
 # or
-yarn prisma generate
+yarn prisma migrate dev
 # or
-pnpm prisma generate
+pnpm prisma migrate dev
 # or
-bun prisma generate
+bun prisma migrate dev
 ```
 
 ### 4.Run the development server
