@@ -29,15 +29,10 @@ function LoginPage() {
 		},
 	});
 
-	function handleKeyDownPassword(event: { key: string }) {
+	async function handleKeyDownPassword(event: { key: string }) {
 		if (event.key === "Enter") {
-			handleLogin();
+			await signin(email, password);
 		}
-	}
-
-	function handleLogin() {
-		signin(email, password);
-		setPassword("");
 	}
 
 	async function signin(email: string, password: string) {
@@ -115,7 +110,7 @@ function LoginPage() {
 					Forgot password?
 				</Link>
 			</div>
-			<button onClick={handleLogin} className={"loginButton"}>
+			<button onClick={async() => {await signin(email, password);}} className={"loginButton"}>
 				Sing In
 			</button>
 			<Link href={"/registration"} className={"dontHaveAccount"}>

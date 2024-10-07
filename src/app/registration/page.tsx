@@ -6,24 +6,19 @@ import "../_styles/Authentication.scss";
 import { trpc } from "../_trpc/client";
 import { redirect } from "next/navigation";
 
-// import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-// // import {setCookie} from "../Utils/Cookies.js";
+import zxcvbn from 'zxcvbn';
 
-// import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-// import config from "../Utils/Config.js";
-// import './CSSFiles/Authentitication.scss'
-// import {Link} from "react-router-dom";
-
-// const app = initializeApp(config.firebaseConfig);
-// const analytics = getAnalytics(app);
-
-function LoginPage() {
+function RegistrationPage() {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [repeatedPassword, setRepeatedPassword] = useState("");
 	const [name, setName] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
+	const [showRepeatedPassword, setShowRepeatedPassword] = useState(false);
+
+	const testResult = zxcvbn(password);
+	const strengthScore = testResult.score * 100/4;
 
 	const { mutate: register } = trpc.user.register.useMutation({
 		onSettled() {
@@ -38,28 +33,68 @@ function LoginPage() {
 		},
 		onSuccess() {
 			console.log("onSuccess");
-			return redirect("/");
-		},
-	});
+			window.location.href = '/';
+			return;
+		}
+	})
 
-	function handleKeyDownPassword(event: { key: string }) {
-		if (event.key === "Enter") {
-			handleLogin();
+	function drawPassStrengthChecker() {
+		return(
+			<div className={"passStrength"}>
+				<div className={"progressBarDiv"}>
+					<div className={"progress"} style={changePasswordColor()}/>
+				</div>
+				<div className={"passStrengthText"} style={{ color: funcProgressColor() }}>
+					{password.length > 0 && createPassLabel()}
+				</div>
+			</div>
+		)
+	}
+
+	const changePasswordColor = () => ({
+		width: `${strengthScore}%`,
+		background: funcProgressColor(),
+		borderRadius: `${(strengthScore === 100) ? '3px' : '3px 0 0 3px'}`,
+	})
+
+	const createPassLabel = () => {
+		switch(testResult.score) {
+			case 0:
+				return 'Very weak';
+			case 1:
+				return 'Weak';
+			case 2:
+				return 'Fear';
+			case 3:
+				return 'Good';
+			case 4:
+				return 'Strong';
+			default:
+				return '';
 		}
 	}
 
-	function handleLogin() {
-		signup(username, email, password)
-			.then((userCredential) => {
-				console.log(userCredential);
-			})
-			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				console.log(errorCode);
-				console.log(errorMessage);
-			});
-		setPassword("");
+	const funcProgressColor = () => {
+		switch(testResult.score) {
+			case 0:
+				return '#828282';
+			case 1:
+				return '#EA1111';
+			case 2:
+				return '#FFAD00';
+			case 3:
+				return '#9bc158';
+			case 4:
+				return '#00b500';
+			default:
+				return 'none';
+		}
+	}
+
+	async function handleKeyDownPassword(event: { key: string }) {
+		if (event.key === "Enter") {
+			await signup(username, email, password)
+		}
 	}
 
 	async function signup(username: string, email: string, password: string) {
@@ -121,7 +156,9 @@ function LoginPage() {
 				Please sing in with your password
 			</div>
 			<div className={"emailInput"}>
-				<div className={"emailInputName"}>Username</div>
+				<div className={"inputTitleAndRequired"}>
+					<div className={"inputName"}>Username</div>
+				</div>
 				<input
 					value={username}
 					type={"username"}
@@ -129,7 +166,9 @@ function LoginPage() {
 				/>
 			</div>
 			<div className={"emailInput"}>
-				<div className={"emailInputName"}>Name</div>
+				<div className={"inputTitleAndRequired"}>
+					<div className={"inputName"}>Name</div>
+				</div>
 				<input
 					value={name}
 					type={"name"}
@@ -137,7 +176,9 @@ function LoginPage() {
 				/>
 			</div>
 			<div className={"emailInput"}>
-				<div className={"emailInputName"}>Email</div>
+				<div className={"inputTitleAndRequired"}>
+					<div className={"inputName"}>Email</div>
+				</div>
 				<input
 					value={email}
 					type={"email"}
@@ -146,9 +187,10 @@ function LoginPage() {
 				/>
 			</div>
 			<div className={"passwordInput"}>
-				<div className={"passwordInputName"}>Password</div>
+				<div className={"inputTitleAndRequired"}>
+					<div className={"inputName"}>Password</div>
+				</div>
 				<input
-					onKeyDown={handleKeyDownPassword}
 					value={password}
 					type={showPassword ? "text" : "password"}
 					onChange={(e) => setPassword(e.target.value)}
@@ -170,19 +212,47 @@ function LoginPage() {
 					</span>
 				)}
 			</div>
-			<div className={"forgotPasswordLink"}>
-				<Link href="/forgotPassword" className={"forgotPasswordText"}>
-					Forgot password?
-				</Link>
+			{drawPassStrengthChecker()}
+			<div className={"repeatPasswordInput"}>
+				<div className={"inputTitleAndRequired"}>
+					<div className={"inputName"}>Repeat password</div>
+				</div>
+				<input
+					onKeyDown={handleKeyDownPassword}
+					value={repeatedPassword}
+					type={showRepeatedPassword ? "text" : "password"}
+					onChange={(e) => setRepeatedPassword(e.target.value)}
+					autoComplete="new-password"
+				/>
+				{showPassword ? (
+					<span
+						className="material-symbols-outlined visibility"
+						onClick={() => setShowRepeatedPassword(!showRepeatedPassword)}
+					>
+						visibility
+					</span>
+				) : (
+					<span
+						className="material-symbols-outlined visibility"
+						onClick={() => setShowRepeatedPassword(!showRepeatedPassword)}
+					>
+						visibility_off
+					</span>
+				)}
+				<div className={"notSamePassError"}>
+					{repeatedPassword.length > 0 && repeatedPassword !== password && "Passwords do not match"}
+				</div>
 			</div>
-			<button onClick={handleLogin} className={"loginButton"}>
-				Sing In
+			<button onClick={async() => {
+				await signup(username, email, password)
+			}} className={"registrationButton"}>
+				Sing Up
 			</button>
-			<Link href="/registration" className={"dontHaveAccount"}>
-				Don’t have an account? Sign Up
+			<Link href='/login' className={"alreadyHaveAnAccount"}>
+				Already have an account? Sign In
 			</Link>
 		</div>
 	);
 }
 
-export default LoginPage;
+export default RegistrationPage;

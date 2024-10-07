@@ -20,7 +20,8 @@
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"superjson": "^2.2.1",
-		"zod": "^3.23.8"
+		"zod": "^3.23.8",
+		"zxcvbn": "^4.4.2"
 	},
 	"devDependencies": {
 		"@lucia-auth/adapter-sqlite": "^3.0.2",
@@ -29,6 +30,7 @@
 		"@types/node": "^22.7.4",
 		"@types/react": "^18.3.10",
 		"@types/react-dom": "^18.3.0",
+		"@types/zxcvbn": "^4.4.5",
 		"better-sqlite3": "^11.3.0",
 		"eslint": "^8.57.1",
 		"eslint-config-next": "14.2.13",
